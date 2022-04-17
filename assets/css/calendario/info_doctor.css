@@ -1,0 +1,20 @@
+.fondo_nav{
+	background-color: #43d8bd;
+}
+
+.textop {
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 35px;
+    font-weight: bold;
+
+    text-shadow: 1px 1px 1px blue,
+        0px 4px 1px rgba(0, 0, 0, 0.1),
+        4px 4px 5px rgba(0, 0, 0, 0.1),
+        0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+.body{
+    background-color: #f3f8fe;
+}

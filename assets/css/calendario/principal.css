@@ -1,0 +1,55 @@
+.fondo_nav{
+	background-color: #088EE5;
+}
+
+.textop {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.body{
+    background-color: #f3f8fe;
+}
+
+.bienvenido{
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-style: italic;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.botonesBajos{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.botonP{
+    display: inline-block;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #088EE5;
+    border: 1px solid #088EE5;
+    padding: 0.532rem 0.854rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 4px;
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+
+
+
+
+
+
