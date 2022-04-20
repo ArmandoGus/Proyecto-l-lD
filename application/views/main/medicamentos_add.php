@@ -33,6 +33,35 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <!-- data tables css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/responsive.bootstrap4.min.css">
+
+    <!--
+    <style data-emotion="css"></style>
+    <style>
+        
+        html * {
+
+            background: rgba(255, 0, 0, .1);
+            box-shadow: 0 0 0 1px red;
+        }
+
+    </style>
+    -->
+
+    <style>
+        .flecha {
+            display: inline;
+        }
+
+        .contenedor {
+            position: relative;
+        }
+
+        .aa {
+            position: absolute;
+            left: auto;
+            top: 5px;
+        }
+    </style>
 </head>
 
 <body class="">
@@ -73,7 +102,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="row">
                 <!-- [ Dashboard ] start -->
                 <div class="col-sm-12">
-                    <h1 class="bienvenido">Control de Medicamentos</h1>
+
+                    <div class="col-sm-12 contenedor">
+                        <a href="<?php echo base_url(); ?>users/poliapp">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up flecha" width="60" height="60" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1" />
+                            </svg>
+                        </a>
+                        <h1 class="bienvenido flecha aa">Control de Medicamentos</h1>
+
+                    </div>
+
+
+
                     <div class="row">
                         <!-- [ basic-table ] start -->
                         <div class="col-md-12">

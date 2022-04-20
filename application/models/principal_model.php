@@ -13,7 +13,6 @@ class principal_model extends CI_Model
 
     public function select($id)
     {
-
         $this->db->where('id_medicamento', $id);
         $query = $this->db->get('medicamentos');
         return $query->result();
@@ -29,6 +28,13 @@ class principal_model extends CI_Model
     public function insert($data)
     {
         $this->db->insert('medicamentos', $data);
+        return true;
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('id_medicamento', $id);
+        $this->db->update('medicamentos', $data);
         return true;
     }
 }

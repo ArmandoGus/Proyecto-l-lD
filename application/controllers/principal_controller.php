@@ -54,9 +54,9 @@ class principal_controller extends CI_Controller
 
 		$data = array(
 
-			'id_usuario' => $id, 
+			'id_usuario' => $id,
 			'nombre_medi' => $_POST['name_medic'],
-			'dosis' => $_POST['dosisU'].' '.$_POST['dosisD'],
+			'dosis' => $_POST['dosisU'] . ' ' . $_POST['dosisD'],
 			'horario' => $_POST['horario'],
 			'via_apli' => $_POST['via_apli'],
 			'fecha_i' => $_POST['fecha_start'],
@@ -66,6 +66,26 @@ class principal_controller extends CI_Controller
 
 		$this->principal_model->insert($data);
 
+		redirect(base_url('principal_controller/cargar_medi'));
+	}
+
+	public function update()
+	{
+		$this->load->model('principal_model');
+		$id = $this->input->get('id');
+
+		$data = array(
+
+			'nombre_medi' => $_POST['name_medic'],
+			'dosis' => $_POST['dosisU'] . ' ' . $_POST['dosisD'],
+			'horario' => $_POST['horario'],
+			'via_apli' => $_POST['via_apli'],
+			'fecha_i' => $_POST['fecha_start'],
+			'fecha_f' => $_POST['fecha_end']
+
+		);
+
+		$this->principal_model->update($id, $data);
 		redirect(base_url('principal_controller/cargar_medi'));
 	}
 }
