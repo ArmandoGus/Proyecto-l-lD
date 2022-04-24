@@ -93,6 +93,14 @@
 												<input type="password" class="form-control" name="Password" aria-describedby="emailHelp" placeholder="Contraseña" required="required">
 											</div>
 
+											<div class="form-check mb-3">
+												<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required="required">
+												<label class="form-check-label" for="defaultCheck1">
+													Acepto <a href="">los términos y condiciones</a>
+												</label>
+												
+											</div>
+											
 											<button type="submit" class="btn btn-success btn-block mb-4 "><i class="feather mr-2 icon-check-circle"></i>Enviar</button>
 
 											<?php

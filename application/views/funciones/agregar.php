@@ -186,7 +186,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
 
                                         <div class="text-center">
-                                            <a href="<?php echo base_url(); ?>principal_controller/cargar_medi"><button type="button" class="btn btn-danger button text-center"><i class="feather mr-2 icon-check-circle"></i>Cancelar</button></a>
+                                            <a href="<?php echo base_url(); ?>principal_controller/cargar_medi"><button type="button" class="btn btn-danger button text-center"><i class="feather mr-2 icon-x-circle"></i>Cancelar</button></a>
                                             <button type="submit" class="btn btn-success button text-center"><i class="feather mr-2 icon-check-circle"></i>Agregar</button>
                                         </div>
                                     </form>

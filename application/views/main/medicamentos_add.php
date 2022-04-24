@@ -20,7 +20,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link rel="icon" href="<?php echo base_url(); ?>assets/images/iconoPrincipal.png" type="image/x-icon">
 
     <!-- css de esta página -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/calendario/principal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/calendario/principal.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
             position: absolute;
             left: auto;
             top: 5px;
+        }
+
+        .cabecera {
+            background-color: black;
+        }
+
+        .white {
+            color: white !important;
+        }
+
+        .black {
+            color: black;
         }
     </style>
 </head>
@@ -120,20 +132,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- [ basic-table ] start -->
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header">
-                                </div>
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
                                         <table id="datatable1" class="table">
                                             <div class="container">
-                                                <thead>
+                                                <thead class="cabecera">
                                                     <tr>
-                                                        <th>Nombre del medicamento</th>
-                                                        <th>Dosis</th>
-                                                        <th>Horario</th>
-                                                        <th>Via de aplicación</th>
-                                                        <th>Fecha de inicio</th>
-                                                        <th>Fecha de fin</th>
+                                                        <th class="white">Nombre del medicamento</th>
+                                                        <th class="white">Dosis</th>
+                                                        <th class="white">Horario</th>
+                                                        <th class="white">Via de aplicación</th>
+                                                        <th class="white">Fecha de inicio</th>
+                                                        <th class="white">Fecha de fin</th>
                                                         <th><a href="<?php echo base_url(); ?>principal_controller/add/?id=<?php echo $id; ?>"><button type="button" class="btn btn-success button"><i class="fas fa-plus"></i></button>
                                                             </a></th>
                                                     </tr>
@@ -141,12 +151,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <tbody>
                                                     <?php foreach ($medicamentos as $row) { ?>
                                                         <tr>
-                                                            <td><?php echo $row->nombre_medi; ?></td>
-                                                            <td><?php echo $row->dosis; ?></td>
-                                                            <td><?php echo $row->horario; ?></td>
-                                                            <td><?php echo $row->via_apli; ?></td>
-                                                            <td><?php echo $row->fecha_i; ?></td>
-                                                            <td><?php echo $row->fecha_f; ?></td>
+                                                            <td class="black"><?php echo $row->nombre_medi; ?></td>
+                                                            <td class="black"><?php echo $row->dosis; ?></td>
+                                                            <td class="black"><?php echo $row->horario; ?></td>
+                                                            <td class="black"><?php echo $row->via_apli; ?></td>
+                                                            <td class="black"><?php echo $row->fecha_i; ?></td>
+                                                            <td class="black"><?php echo $row->fecha_f; ?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url()  ?>principal_controller/select/?id=<?= $row->id_medicamento;  ?>"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a>
                                                                 <a href="<?php echo base_url()  ?>principal_controller/delete/?id=<?= $row->id_medicamento;  ?>" onclick="return confirm('¿Estás seguro de eliminar este medicamento?');"><button type="button" class="btn btn-danger confirm-delete"><i class="fas fa-trash-alt"></i></button></a>
