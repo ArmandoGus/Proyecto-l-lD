@@ -40,8 +40,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     <!-- Variables -->
     <?php $id = $this->session->userdata('id_usuarios'); ?>
+    <!-- 
     <?php $medicamentos = $this->session->userdata('tabla'); ?>
 
+-->
+    
     <!-- [ Header ] start -->
     <header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed ">
 
@@ -132,8 +135,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                         <th>Dosis</th>
                                                         <th>Horario</th>
                                                         <th>Via de aplicación</th>
-                                                        <th>Fecha de inicio</th>
-                                                        <th>Fecha de fin</th>
+                                                        <th>Alarma</th>
+                                                        <th>Confirmación de toma</th>
                                                     </tr>
                                                 </thead>
                                                 <!--

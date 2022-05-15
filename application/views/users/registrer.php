@@ -96,12 +96,15 @@
 											<div class="form-check mb-3">
 												<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required="required">
 												<label class="form-check-label" for="defaultCheck1">
-													Acepto <a href="">los términos y condiciones</a>
+													Acepto <a href="<?php echo base_url(); ?>users/vista_terminos">los términos y condiciones</a>
 												</label>
-												
+
 											</div>
-											
-											<button type="submit" class="btn btn-success btn-block mb-4 "><i class="feather mr-2 icon-check-circle"></i>Enviar</button>
+
+											<div class="text-center">
+												<a href="<?php echo base_url(); ?>users/sesionInicio"><button type="button" class="btn btn-danger button text-center"><i class="feather mr-2 icon-x-circle"></i>Cancelar</button></a>
+												<button type="submit" class="btn btn-success button text-center"><i class="feather mr-2 icon-check-circle"></i>Agregar</button>
+											</div>
 
 											<?php
 											if ($this->session->flashdata('success')) { ?>

@@ -6,8 +6,10 @@ class principal_controller extends CI_Controller
 
 	public function doctor()
 	{
-
-		$this->load->view('main/info_doctor');
+		$this->load->model('principal_model');
+		$id = $this->session->userdata('id_usuarios');
+		$data['doctores'] = $this->principal_model->get_docto($id);
+		$this->load->view('main/info_doctor', $data);
 	}
 
 	public function cargar_medi()
@@ -26,6 +28,13 @@ class principal_controller extends CI_Controller
 		$this->load->view('funciones/agregar', $id);
 	}
 
+	public function add_doctores()
+	{
+		$this->load->model('principal_model');
+		$id = $this->session->userdata('id_usuarios');
+		$this->load->view('funciones/agregar_doctores', $id);
+	}
+
 	public function select()
 	{
 
@@ -37,6 +46,17 @@ class principal_controller extends CI_Controller
 		$this->load->view('funciones/editar', $data);
 	}
 
+	public function select_doctor()
+	{
+
+		$this->load->model('principal_model');
+		$id = $this->input->get('id');
+
+		$data['result'] = $this->principal_model->select_doctor($id);
+
+		$this->load->view('funciones/editar_doctores', $data);
+	}
+
 	public function delete()
 	{
 
@@ -45,6 +65,14 @@ class principal_controller extends CI_Controller
 		$this->principal_model->delete($id);
 
 		redirect(base_url('principal_controller/cargar_medi'));
+	}
+
+	public function delete_doctor()
+	{
+		$this->load->model('principal_model');
+		$id = $this->input->get('id');
+		$this->principal_model->delete_doctor($id);
+		redirect(base_url('principal_controller/doctor'));
 	}
 
 	public function insert()
@@ -69,6 +97,25 @@ class principal_controller extends CI_Controller
 		redirect(base_url('principal_controller/cargar_medi'));
 	}
 
+	public function insert_doctor()
+	{
+		$this->load->model('principal_model');
+		$id = $this->session->userdata('id_usuarios');
+
+		$data = array(
+
+			'id_usuario' => $id,
+			'nombre_doc' => $_POST['name_doctor'],
+			'correo_ED' => $_POST['correo_doc'],
+			'num_telefono' => $_POST['telefono_doctor']
+
+		);
+
+		$this->principal_model->insert_doctor($data);
+
+		redirect(base_url('principal_controller/doctor'));
+	}
+
 	public function update()
 	{
 		$this->load->model('principal_model');
@@ -87,5 +134,22 @@ class principal_controller extends CI_Controller
 
 		$this->principal_model->update($id, $data);
 		redirect(base_url('principal_controller/cargar_medi'));
+	}
+
+	public function update_doctor()
+	{
+		$this->load->model('principal_model');
+		$id = $this->input->get('id');
+
+		$data = array(
+
+			'nombre_doc' => $_POST['name_doctor'],
+			'correo_ED' => $_POST['correo_doc'],
+			'num_telefono' => $_POST['telefono_doctor']
+
+		);
+
+		$this->principal_model->update_doctor($id, $data);
+		redirect(base_url('principal_controller/doctor'));
 	}
 }

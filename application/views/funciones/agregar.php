@@ -135,7 +135,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <label>Horario</label>
                                             <select class="form-control" aria-describedby="emailHelp" name="horario" required>
                                                 <option disabled selected>Selecciona un horario</option>
-                                                <option value="Cada hora">Cada hora</option>
+                                                <option value="Cada 1 hora">Cada 1 hora</option>
                                                 <option value="Cada 2 horas">Cada 2 horas</option>
                                                 <option value="Cada 3 horas">Cada 3 horas</option>
                                                 <option value="Cada 4 horas">Cada 4 horas</option>

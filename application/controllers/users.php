@@ -4,25 +4,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class users extends CI_Controller
 {
 
-	public function __construct() {
-        parent::__construct();
-      
-		// load Session Library
-        $this->load->library('session');
+	public function __construct()
+	{
+		parent::__construct();
 
-        $this->load->model('users_model');
-		
-    }
+		// load Session Library
+		$this->load->library('session');
+
+		$this->load->model('users_model');
+	}
 
 	public function index()
 	{
+		$this->load->view('users/principalPreview');
+	}
 
+	public function sesionInicio(){
 		$this->load->view('users/login');
 	}
 
 	public function registrer_view()
 	{
-
 		$this->load->view('users/registrer');
 	}
 
@@ -31,6 +33,10 @@ class users extends CI_Controller
 		$this->load->view('main/principal');
 	}
 
+	public function vista_terminos(){
+		$this->load->view('users/TerminosCon');
+	}
+	
 	public function registrer_user()
 	{
 
@@ -59,12 +65,13 @@ class users extends CI_Controller
 				$this->load->model('users_model');
 				$this->users_model->registrer_user($data);
 				$this->session->set_flashdata('success', 'Usuario registrado correctamente!');
-				redirect(base_url('users/index'));
+				redirect(base_url('users/sesionInicio'));
 			}
 		}
 	}
 
-	public function login_user(){
+	public function login_user()
+	{
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$this->form_validation->set_rules('Email', 'Email', 'required');
@@ -78,7 +85,7 @@ class users extends CI_Controller
 				$this->load->model('users_model');
 				$status = $this->users_model->login_user($Password, $Email);
 
-				
+
 				if ($status != false) {
 					$id = $status->id_usuarios;
 					$User_Name = $status->nombre;
@@ -90,8 +97,8 @@ class users extends CI_Controller
 					$session_data = array(
 						'id_usuarios' => $id,
 						'nombre' => $User_Name,
-						'apellido_p'=> $ap,
-						'apellido_m'=> $am,
+						'apellido_p' => $ap,
+						'apellido_m' => $am,
 						'correo' => $Email
 					);
 
@@ -101,11 +108,11 @@ class users extends CI_Controller
 				} else {
 					$this->session->set_flashdata('error', 'Correo o Contraseña incorrectos');
 
-					redirect(base_url('users/index'));
+					redirect(base_url('users/sesionInicio'));
 				}
 			} else {
 				$this->session->set_flashdata('error', 'Error');
-				redirect(base_url('users/index'));
+				redirect(base_url('users/sesionInicio'));
 			}
 		}
 	}

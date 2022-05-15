@@ -33,10 +33,39 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <!-- data tables css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/responsive.bootstrap4.min.css">
+    <style>
+        .flecha {
+            display: inline;
+        }
+
+        .contenedor {
+            position: relative;
+        }
+
+        .aa {
+            position: absolute;
+            left: auto;
+            top: 5px;
+        }
+
+        .cabecera {
+            background-color: black;
+        }
+
+        .white {
+            color: white !important;
+        }
+
+        .black {
+            color: black;
+        }
+    </style>
 </head>
 
 <body class="">
 
+    <!-- Variables -->
+    <?php $id = $this->session->userdata('id_usuarios'); ?>
 
     <!-- [ Header ] start -->
     <header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed ">
@@ -73,8 +102,55 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <!-- [ Dashboard ] start -->
                 <div class="col-sm-12">
 
-                    
+                    <div class="col-sm-12 contenedor">
+                        <a href="<?php echo base_url(); ?>users/poliapp">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up flecha" width="60" height="60" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1" />
+                            </svg>
+                        </a>
+                        <h1 class="bienvenido flecha aa">Información de los doctores</h1>
 
+                    </div>
+
+
+
+                    <div class="row">
+                        <!-- [ basic-table ] start -->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table id="datatable1" class="table">
+                                            <div class="container">
+                                                <thead class="cabecera">
+                                                    <tr>
+                                                        <th class="white">Nombre del doctor</th>
+                                                        <th class="white">Correo electrónico</th>
+                                                        <th class="white">Teléfono</th>
+                                                        <th><a href="<?php echo base_url(); ?>principal_controller/add_doctores/?id=<?php echo $id; ?>"><button type="button" class="btn btn-success button"><i class="fas fa-plus"></i></button>
+                                                            </a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($doctores as $row) { ?>
+                                                        <tr>
+                                                            <td class="black"><?php echo $row->nombre_doc; ?></td>
+                                                            <td class="black"><?php echo $row->correo_ED; ?></td>
+                                                            <td class="black"><?php echo $row->num_telefono; ?></td>
+                                                            <td>
+                                                                <a href="<?php echo base_url()  ?>principal_controller/select_doctor/?id=<?= $row->id_doctor;  ?>"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a>
+                                                                <a href="<?php echo base_url()  ?>principal_controller/delete_doctor/?id=<?= $row->id_doctor;  ?>" onclick="return confirm('¿Estás seguro de eliminar este doctor?');"><button type="button" class="btn btn-danger confirm-delete"><i class="fas fa-trash-alt"></i></button></a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
