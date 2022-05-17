@@ -129,8 +129,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <option value="ml">ml</option>
                                                 <option value="L">L</option>
                                                 <option value="Cucharadas">Cucharadas</option>
+                                                <option value="Cápsulas">Cápsulas</option>
                                                 <option value="Gotas">Gotas</option>
-                                                <option value="pastillas">Pastillas</option>
+                                                <option value="Pastillas">Pastillas</option>
+                                                <option value="Microgotas">Microgotas</option>
                                             </select>
                                         </div>
 
@@ -138,29 +140,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <label>Horario</label>
                                             <select class="form-control" aria-describedby="emailHelp" name="horario" required>
                                                 <option value="<?php echo $result[0]->horario; ?>"><?php echo $result[0]->horario; ?></option>
-                                                <option value="Cada hora">Cada hora</option>
+                                                <option value="Cada 1 hora">Cada 1 hora</option>
                                                 <option value="Cada 2 horas">Cada 2 horas</option>
                                                 <option value="Cada 3 horas">Cada 3 horas</option>
                                                 <option value="Cada 4 horas">Cada 4 horas</option>
-                                                <option value="Cada 5 horas">Cada 5 horas</option>
                                                 <option value="Cada 6 horas">Cada 6 horas</option>
-                                                <option value="Cada 7 horas">Cada 7 horas</option>
                                                 <option value="Cada 8 horas">Cada 8 horas</option>
-                                                <option value="Cada 9 horas">Cada 9 horas</option>
-                                                <option value="Cada 10 horas">Cada 10 horas</option>
-                                                <option value="Cada 11 horas">Cada 11 horas</option>
                                                 <option value="Cada 12 horas">Cada 12 horas</option>
-                                                <option value="Cada 13 horas">Cada 13 horas</option>
-                                                <option value="Cada 14 horas">Cada 14 horas</option>
-                                                <option value="Cada 15 horas">Cada 15 horas</option>
-                                                <option value="Cada 16 horas">Cada 16 horas</option>
-                                                <option value="Cada 17 horas">Cada 17 horas</option>
-                                                <option value="Cada 18 horas">Cada 18 horas</option>
-                                                <option value="Cada 19 horas">Cada 19 horas</option>
-                                                <option value="Cada 20 horas">Cada 20 horas</option>
-                                                <option value="Cada 21 horas">Cada 21 horas</option>
-                                                <option value="Cada 22 horas">Cada 22 horas</option>
-                                                <option value="Cada 23 horas">Cada 23 horas</option>
                                                 <option value="Cada 24 horas">Cada 24 horas</option>
                                             </select>
                                         </div>
@@ -179,13 +165,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Fecha de Inicio</label>
+                                            <label>Fecha de la toma</label>
                                             <input type="date" class="form-control" value="<?php echo $result[0]->fecha_i; ?>" name="fecha_start" aria-describedby="emailHelp" placeholder="-" required="required" id="datepicker">
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Fecha de Fin</label>
-                                            <input type="date" class="form-control" value="<?php echo $result[0]->fecha_f; ?>" name="fecha_end" aria-describedby="emailHelp" placeholder="-" required="required" id="datepicker">
+                                            <label>Hora de la toma</label>
+                                            <input type="time" class="form-control" value="<?php echo $result[0]->fecha_f; ?>" name="fecha_end" aria-describedby="emailHelp" placeholder="-" required="required" id="datepicker">
                                         </div>
 
                                         <div class="text-center">

@@ -133,6 +133,7 @@ class principal_controller extends CI_Controller
 		);
 
 		$this->principal_model->update($id, $data);
+
 		redirect(base_url('principal_controller/cargar_medi'));
 	}
 

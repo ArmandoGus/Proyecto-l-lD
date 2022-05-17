@@ -141,9 +141,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                         <th class="white">Nombre del medicamento</th>
                                                         <th class="white">Dosis</th>
                                                         <th class="white">Horario</th>
-                                                        <th class="white">Via de aplicación</th>
-                                                        <th class="white">Fecha de inicio</th>
-                                                        <th class="white">Fecha de fin</th>
+                                                        <th class="white">Vía de administración</th>
+                                                        <th class="white">Fecha de la próxima toma</th>
+                                                        <th class="white">Hora de la próxima toma</th>
                                                         <th><a href="<?php echo base_url(); ?>principal_controller/add/?id=<?php echo $id; ?>"><button type="button" class="btn btn-success button"><i class="fas fa-plus"></i></button>
                                                             </a></th>
                                                     </tr>

@@ -24,6 +24,25 @@ class users_model extends CI_Model {
 
     }
 
-    
+    public function get_codes($var)
+    {
+        $this->db->where('id_usuario', $var);
+        $query = $this->db->get('medicamentos');
+        return $query->result();
+    }
+
+    public function selectMedi($id)
+    {
+        $this->db->where('id_medicamento', $id);
+        $query = $this->db->get('medicamentos');
+        return $query->result_array();
+    }
+
+    public function actualizaFyT($id, $data)
+    {
+        $this->db->where('id_medicamento', $id);
+        $this->db->update('medicamentos', $data);
+        return true;
+    }
 
 }

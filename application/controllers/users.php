@@ -19,7 +19,8 @@ class users extends CI_Controller
 		$this->load->view('users/principalPreview');
 	}
 
-	public function sesionInicio(){
+	public function sesionInicio()
+	{
 		$this->load->view('users/login');
 	}
 
@@ -30,13 +31,18 @@ class users extends CI_Controller
 
 	public function poliapp()
 	{
-		$this->load->view('main/principal');
+		$this->load->model('users_model');
+		$id = $this->session->userdata('id_usuarios');
+		$data['medicamentos'] = $this->users_model->get_codes($id);
+
+		$this->load->view('main/principal', $data);
 	}
 
-	public function vista_terminos(){
+	public function vista_terminos()
+	{
 		$this->load->view('users/TerminosCon');
 	}
-	
+
 	public function registrer_user()
 	{
 
@@ -121,5 +127,48 @@ class users extends CI_Controller
 	{
 		session_destroy();
 		redirect(base_url('users/index'));
+	}
+
+	public function actualizaFyT()
+	{
+		$this->load->model('users_model');
+		$id = $this->input->get('id');
+		$fe = $this->users_model->selectMedi($id);
+		//echo "<script>console.log('Fecha de la toma: " . $fe[0]["fecha_i"] . "' );</script>";
+		//echo "<script>console.log('Hora de la toma: " . $fe[0]["fecha_f"] . "' );</script>";
+		$espaciado = " ";
+		$cambio = explode($espaciado, $fe[0]["horario"]);
+		//echo "<script>console.log('Valor para sumar a las horas: " . $cambio[1] . "' );</script>";
+		$input =  $fe[0]["fecha_f"];
+		$date = strtotime($input);
+		$final = date('H:i:s', $date);
+		$nuevaHora = strtotime('+' . $cambio[1] . ' hour', strtotime($final));
+		$inputt =  $fe[0]["fecha_i"];
+		$datee = strtotime($inputt);
+		$finall = date('Y-m-d', $datee);
+		$espaciadoHora = ":";
+		$horacom = explode($espaciadoHora, $final);
+		//echo "<script>console.log('Hora para comparar: " . $horacom[0] . "' );</script>";
+		$comparador = $horacom[0];
+		for ($i = 0; $i < $cambio[1]; $i++) {
+			$comparador += 1;
+		}
+		if ($comparador >= 24) {
+			$nuevaFecha = strtotime($finall . "+ 1 days");
+			$data = array(
+				'fecha_i' => date('Y-m-d', $nuevaFecha),
+				'fecha_f' => date('H:i:s', $nuevaHora)
+			);
+			//echo "<script>console.log('Fecha modificada final: " . date('Y-m-d', $nuevaFecha) . "' );</script>";
+		} else {
+			$data = array(
+				'fecha_i' => $finall,
+				'fecha_f' => date('H:i:s', $nuevaHora)
+			);
+			//echo "<script>console.log('Fecha modificada final: " . $finall . "' );</script>";
+		}
+		$this->users_model->actualizaFyT($id, $data);
+		redirect(base_url('users/poliapp'));
+
 	}
 }

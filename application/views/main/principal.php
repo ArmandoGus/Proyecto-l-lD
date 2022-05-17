@@ -34,17 +34,41 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <!-- data tables css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/plugins/responsive.bootstrap4.min.css">
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Orbitron:700);
+
+        .contenedor {
+            background: white !important;
+            box-shadow: rgba(100, 100, 111, 0.6) 0px 7px 29px 0px;
+            border-radius: 15px;
+            text-align: center;
+            color: black;
+            font-family: 'Orbitron', sans-serif;
+            animation: all .7s;
+            margin: 10%;
+            padding: 10px;
+            background: rgba(100, 100, 100, 0.3);
+        }
+
+        .t {
+            font-size: 2em;
+        }
+
+        .timeis {
+            width: 100%;
+            padding: 10px;
+            font-size: 3em;
+        }
+
+    </style>
 </head>
 
 <body class="">
 
     <!-- Variables -->
     <?php $id = $this->session->userdata('id_usuarios'); ?>
-    <!-- 
-    <?php $medicamentos = $this->session->userdata('tabla'); ?>
 
--->
-    
     <!-- [ Header ] start -->
     <header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed ">
 
@@ -110,10 +134,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                                 <!-- Fin del calendario -->
                             </center>
+
+                            <div class="contenedor">
+                                <div class="t">Hora:</div>
+                                <div class="timeis" id="tm"></div>
+                            </div>
+
                             <div class="botonesBajos">
                                 <a href="<?php echo base_url(); ?>principal_controller/cargar_medi"> <button type="button" class="botonP">Medicamentos</button></a>
                                 <a href="<?php echo base_url(); ?>principal_controller/doctor"> <button type="button" class="botonP">Información del médico</button></a>
                             </div>
+
                         </div>
 
                         <div class="col-md-8 green">
@@ -133,26 +164,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                     <tr>
                                                         <th>Nombre del medicamento</th>
                                                         <th>Dosis</th>
-                                                        <th>Horario</th>
-                                                        <th>Via de aplicación</th>
+                                                        <th>Vía de administración</th>
                                                         <th>Alarma</th>
-                                                        <th>Confirmación de toma</th>
+                                                        <th>Confirmar toma</th>
                                                     </tr>
                                                 </thead>
-                                                <!--
+
                                                 <tbody>
-                                                    <?php foreach ($medicamentos as $table) { ?>
+                                                    <?php foreach ($medicamentos as $row) { ?>
                                                         <tr>
-                                                            <td><?php echo $table->nombre_medi; ?></td>
-                                                            <td><?php echo $table->dosis; ?></td>
-                                                            <td><?php echo $table->horario; ?></td>
-                                                            <td><?php echo $table->via_apli; ?></td>
-                                                            <td><?php echo $table->fecha_i; ?></td>
-                                                            <td><?php echo $table->fecha_f; ?></td>
+                                                            <td><?php echo $row->nombre_medi; ?></td>
+                                                            <td><?php echo $row->dosis; ?></td>
+                                                            <td><?php echo $row->via_apli; ?></td>
+                                                            <td><?php echo $row->fecha_i;
+                                                                echo "<br>";
+                                                                echo $row->fecha_f ?></td>
+                                                            <td>
+                                                                <center>
+                                                                    <a href="<?php echo base_url()  ?>users/actualizaFyT/?id=<?= $row->id_medicamento;  ?>"><button type="button" id="btnEnviar" class="btn btn-primary" disabled><i class="fas fa-bell"></i></button></a>
+                                                                </center>
+                                                            </td>
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
-                                                    -->
+
                                             </table>
                                         </div>
                                     </div>
@@ -184,64 +219,78 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 </html>
 
+<?php
+$pointer = 0;
+foreach ($medicamentos as $row) {
+    $nombre_medica[$pointer] = $row->nombre_medi;
+    $dosis_toma[$pointer] = $row->horario;
+    $fecha_toma[$pointer] = $row->fecha_i;
+    $hora_toma[$pointer] = $row->fecha_f;
+    $pointer++;
+}
+?>
+
 <script>
-    function getPlanning_fromDate(sDate, eDate) {
+    function reloj() {
+        var hoy = new Date();
+        var hora = hoy.getHours();
+        var minuto = hoy.getMinutes();
+        var segundo = hoy.getSeconds();
 
-        $.ajax({
-            url: "<?php echo site_url('principal_controller/getMedicamentos'); ?>",
-            method: "POST",
-            data: {
-                id: '<?php echo $id; ?>'
-            },
-            async: true,
-            dataType: 'json',
-            success: function(data) {
+        if (minuto < 10) {
+            minuto = "0" + minuto;
+        };
 
-                console.log(data)
-                var table = document.querySelector('#datatable2')
-                hideRows_OfTable(table)
-                if (data.length > 0) {
-                    for (let i = 0; i < data.length; i++) {
+        if (segundo < 10) {
+            segundo = "0" + segundo;
+        };
 
-                        appendHTML_TR(data[i].nombre_medi, data[i].dosis, data[i].horario, data[i].via_apli, data[i].fecha_i, data[i].fecha_f, table)
-                    }
-                }
-            },
-            error: function(request, status, error) {
+        var ano = hoy.getFullYear();
+        var mes = hoy.getMonth() + 1;
+        var dia = hoy.getDate();
 
-                var val = request.responseText;
-                alert("error" + val + error);
-            }
-        });
-    }
+        if (mes < 10) {
+            mes = "0" + mes;
+        };
 
-    function hideRows_OfTable(table) {
+        if (dia < 10) {
+            dia = "0" + dia;
+        };
 
-        if (table.rows.length > 1) {
-            for (let i = 1; i < table.rows.length; i++) {
+        //Definitivo
+        let puntero = '<?= $pointer ?>';
+        //console.log("Total de medicamentos: " + puntero);
+        var i = 0;
+        var nombre_me = <?php echo json_encode($nombre_medica); ?>;
+        var dosis_tomas = <?php echo json_encode($dosis_toma); ?>;
+        var fecha_tomas = <?php echo json_encode($fecha_toma); ?>;
+        var hora_tomas = <?php echo json_encode($hora_toma); ?>;
 
-                table.rows[i].style.display = 'none';
-                table.rows[i].classList.add("noExl");
-            }
+        var btnEnviar = document.getElementById('btnEnviar');
+
+        for (i = 0; i < puntero; i++) {
+            var hms = hora + ":" + minuto + ":" + segundo;
+            var amd = ano + "-" + mes + "-" + dia;
+            var cada = dosis_tomas[i].split(' ');
+
+            //console.log("Comparación con el array: "+hms);
+            //console.log("Contenido del array en la posición " + i + ": " + dosis_tomas[i]);
+
+            var cada = dosis_tomas[i].split(' ');
+            //console.log("Contenido ya solo: " + cada[1]);
+
+            if (hms == hora_tomas[i] && amd == fecha_tomas[i]) {
+                alert("Es hora de la administración de tu medicamento: " + nombre_me[i]);
+                btnEnviar.disabled = false;
+            };
+
         }
-    }
 
-    function appendHTML_TR(nombre_medi, dosis, horario, via_apli, fecha_i, fecha_f, tableID) {
-        var tr_HTML = `
-		<tr  >
-			<td>${nombre_medi}</td>
-			<td>${dosis}</td>
-			<td>${horario}</td>
-			<td>${via_apli}</td>
-			<td>${fecha_i} </td>
-			<td>${fecha_f} </td>
-		</tr>`
-        tableID.insertAdjacentHTML('beforeend', tr_HTML)
-    }
+        // console.log("\n");
+        var tm = document.getElementById("tm");
+        tm.textContent = (hora + ":" + minuto + ":" + segundo);
 
-    function replaceBlank(str) {
-        let newStr = str.trim()
-        newStr = newStr.replaceAll(" ", "%20");
-        return newStr
-    }
+    };
+
+    setInterval(reloj, 1000);
 </script>
